@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>空中英語教室互動學習</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>空中英語教室 AI 學習平台</title>
 
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -19,160 +21,194 @@
 
 <script type="text/babel">
 
-const { useState, useEffect } = React;
+const {useState,useEffect} = React;
 
 function App(){
 
-const [lesson,setLesson] = useState(null);
-const [loading,setLoading] = useState(true);
-const [date,setDate] = useState("");
-const [section,setSection] = useState(0);
+const [lesson,setLesson]=useState(null);
+const [articles,setArticles]=useState([]);
+const [section,setSection]=useState(0);
+const [date,setDate]=useState("");
+const [quiz,setQuiz]=useState(null);
+const [favorites,setFavorites]=useState(
+JSON.parse(localStorage.getItem("favWords")||"[]")
+);
 
 useEffect(()=>{
 
-const today = new Date().toISOString().split("T")[0];
-setDate(today);
-loadArticle(today);
+fetch("articles/index.json")
+.then(r=>r.json())
+.then(data=>{
+setArticles(data);
 
-},[]);
+if(data.length>0){
+loadArticle(data[0].date);
+setDate(data[0].date);
+}
+})
+
+},[])
 
 function loadArticle(d){
 
-setLoading(true);
-
 fetch(`articles/${d}.json`)
-.then(res=>res.json())
+.then(r=>r.json())
 .then(data=>{
 setLesson(data);
-setLoading(false);
 setSection(0);
-})
-.catch(()=>{
-setLesson(null);
-setLoading(false);
+setQuiz(null);
 })
 
 }
 
 function speak(text){
 
-const utter = new SpeechSynthesisUtterance(text);
-utter.lang="en-US";
-speechSynthesis.speak(utter);
+let u=new SpeechSynthesisUtterance(text);
+u.lang="en-US";
+speechSynthesis.speak(u);
 
 }
 
-if(loading){
+function toggleFav(word){
 
-return(
-<div className="text-center mt-40 text-2xl">
-Loading...
-</div>
-)
+let newFav;
+
+if(favorites.includes(word)){
+newFav=favorites.filter(w=>w!==word);
+}else{
+newFav=[...favorites,word];
+}
+
+setFavorites(newFav);
+localStorage.setItem("favWords",JSON.stringify(newFav));
 
 }
 
-if(!lesson){
+function generateQuiz(){
 
-return(
-<div className="text-center mt-40 text-2xl">
+let words=lesson.vocabulary;
 
-找不到文章
+let q=words[Math.floor(Math.random()*words.length)];
 
-<div className="mt-6">
-<input
-type="date"
-value={date}
-onChange={(e)=>{
-setDate(e.target.value);
-loadArticle(e.target.value);
-}}
-className="border p-2"
-/>
-</div>
+let options=[q.trans];
 
-</div>
-)
+while(options.length<4){
+
+let r=words[Math.floor(Math.random()*words.length)].trans;
+
+if(!options.includes(r)) options.push(r);
 
 }
 
-const part = lesson.content[section];
+options.sort(()=>Math.random()-0.5);
+
+setQuiz({
+word:q.word,
+answer:q.trans,
+options
+})
+
+}
 
 return(
 
-<div className="max-w-4xl mx-auto p-6">
+<div className="max-w-6xl mx-auto p-6">
 
 {/* Header */}
 
-<div className="bg-white p-6 rounded-xl shadow mb-6">
+<div className="bg-white shadow rounded-xl p-6 mb-6">
 
-<h1 className="text-3xl font-bold mb-2">
-{lesson.meta.mainTitleEn}
+<h1 className="text-3xl font-bold">
+空中英語教室 AI 學習平台
 </h1>
 
-<h2 className="text-xl text-gray-600">
-{lesson.meta.mainTitleZh}
-</h2>
-
-<p className="mt-2 text-gray-500">
-{lesson.meta.subtitle}
+<p className="text-gray-500">
+Daily English Interactive Learning
 </p>
 
 </div>
 
-{/* Date Switch */}
+<div className="grid grid-cols-4 gap-6">
 
-<div className="mb-6">
+{/* Sidebar */}
 
-<input
-type="date"
-value={date}
-onChange={(e)=>{
-setDate(e.target.value);
-loadArticle(e.target.value);
+<div className="col-span-1 bg-white p-4 rounded-xl shadow">
+
+<h2 className="font-bold mb-3">文章列表</h2>
+
+{articles.map(a=>(
+<div
+key={a.date}
+className="cursor-pointer p-2 hover:bg-gray-100"
+onClick={()=>{
+
+setDate(a.date)
+loadArticle(a.date)
+
 }}
-className="border p-2"
-/>
+>
+{a.date}
+<br/>
+<span className="text-sm text-gray-500">
+{a.title}
+</span>
+</div>
+))}
+
+<hr className="my-4"/>
+
+<h2 className="font-bold mb-2">收藏單字</h2>
+
+{favorites.map(f=>(
+<div key={f}>{f}</div>
+))}
 
 </div>
 
 {/* Article */}
 
+<div className="col-span-3">
+
+{lesson && (
+
 <div className="bg-white p-6 rounded-xl shadow">
 
-<h3 className="text-xl font-bold mb-2">
-{part.headingEn}
+<h2 className="text-2xl font-bold">
+{lesson.meta.mainTitleEn}
+</h2>
+
+<h3 className="text-gray-600 mb-4">
+{lesson.meta.mainTitleZh}
 </h3>
 
-<h4 className="text-lg text-gray-600 mb-4">
-{part.headingZh}
+<div>
+
+<h4 className="font-bold text-lg">
+{lesson.content[section].headingEn}
 </h4>
 
-<p className="text-lg leading-relaxed mb-4">
-{part.contentEn}
+<p className="mt-2">
+{lesson.content[section].contentEn}
 </p>
 
-<p className="text-gray-700 leading-relaxed">
-{part.contentZh}
+<p className="text-gray-600 mt-2">
+{lesson.content[section].contentZh}
 </p>
 
 <button
-onClick={()=>speak(part.contentEn)}
-className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+className="mt-3 bg-blue-500 text-white px-3 py-1 rounded"
+onClick={()=>speak(lesson.content[section].contentEn)}
 >
-🔊 朗讀
+朗讀
 </button>
 
 </div>
 
-{/* Navigation */}
-
-<div className="flex justify-between mt-6">
+<div className="flex justify-between mt-4">
 
 <button
 disabled={section===0}
 onClick={()=>setSection(section-1)}
-className="bg-gray-300 px-4 py-2 rounded"
 >
 上一段
 </button>
@@ -180,7 +216,6 @@ className="bg-gray-300 px-4 py-2 rounded"
 <button
 disabled={section===lesson.content.length-1}
 onClick={()=>setSection(section+1)}
-className="bg-gray-300 px-4 py-2 rounded"
 >
 下一段
 </button>
@@ -189,46 +224,88 @@ className="bg-gray-300 px-4 py-2 rounded"
 
 {/* Vocabulary */}
 
-<div className="bg-white p-6 rounded-xl shadow mt-8">
-
-<h3 className="text-2xl font-bold mb-4">
-單字 Vocabulary
+<h3 className="text-xl font-bold mt-8">
+Vocabulary
 </h3>
 
 {lesson.vocabulary.map((v,i)=>(
+<div key={i} className="border-b py-3">
 
-<div key={i} className="mb-4 border-b pb-3">
+<b>{v.word}</b> ({v.pos})
 
-<div className="text-lg font-semibold">
-{v.word} ({v.pos})
-</div>
+<div>{v.trans}</div>
 
-<div className="text-gray-500">
-{v.ipa}
-</div>
-
-<div>
-{v.trans}
-</div>
-
-<div className="mt-2 text-gray-700">
+<div className="text-sm text-gray-500">
 {v.exEn}
 </div>
 
-<div className="text-gray-600">
-{v.exZh}
-</div>
+<button
+className="text-blue-500"
+onClick={()=>speak(v.word)}
+>
+發音
+</button>
 
 <button
-onClick={()=>speak(v.word)}
-className="mt-2 text-blue-500"
+className="ml-3 text-yellow-600"
+onClick={()=>toggleFav(v.word)}
 >
-🔊 發音
+收藏
 </button>
 
 </div>
-
 ))}
+
+{/* Quiz */}
+
+<div className="mt-8">
+
+<button
+className="bg-green-500 text-white px-4 py-2 rounded"
+onClick={generateQuiz}
+>
+產生單字測驗
+</button>
+
+{quiz && (
+
+<div className="mt-4">
+
+<h4 className="font-bold">
+{quiz.word} 的意思是？
+</h4>
+
+{quiz.options.map((o,i)=>(
+<div key={i}>
+
+<button
+className="border px-3 py-1 mt-1"
+onClick={()=>{
+
+if(o===quiz.answer)
+alert("答對")
+else
+alert("答錯")
+
+}}
+>
+{o}
+</button>
+
+</div>
+))}
+
+</div>
+
+)}
+
+</div>
+
+</div>
+
+)}
+
+</div>
 
 </div>
 
@@ -238,7 +315,7 @@ className="mt-2 text-blue-500"
 
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>)
 
 </script>
 
