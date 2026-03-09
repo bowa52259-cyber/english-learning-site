@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "代理型 AI 與帳號停用新政策",
+    "subtitle": "如何應用 AI 以及澳洲社群媒體新規範",
+    "series": "Technology & News Focus",
+    "mainTitleEn": "Agentic AI & Social Media Policy",
+    "mainTitleZh": "代理型 AI 與社群媒體政策"
+  },
+  "content": [
+    {
+      "headingEn": "How to Make It Work for You",
+      "headingZh": "如何讓 AI 為你效勞",
+      "contentEn": "Generally, agentic AI will help you operate faster, reduce errors, make better decisions and focus on more strategic work. If you are a student, it might help you to organize research, summarize readings or plan assignments. If you are already working, it could take care of your schedule, send you reminders or simplify routine tasks.",
+      "contentZh": "一般而言，代理型 AI 能幫助你更快運作、減少錯誤、做出更好的決策，並專注於更具策略性的工作。如果你是學生，這可能有助於你組織研究、摘要閱讀或規劃作業。如果你已經在工作，它可以幫你安排行程、發送提醒或簡化例行任務。"
+    },
+    {
+      "headingEn": "What Should We Watch For?",
+      "headingZh": "我們應該注意什麼？",
+      "contentEn": "Greater independence brings greater responsibility. If these systems are not carefully designed to follow human values, they could act in unexpected or harmful ways. Clear rules, oversight and ethical design are essential to ensure safe use. Used wisely, agentic AI could become one of the most valuable technologies in history.",
+      "contentZh": "更大的獨立性帶來更大的責任。如果這些系統沒有經過細心設計以符合人類價值觀，它們可能會以意想不到或有害的方式運作。清晰的規則、監督以及倫理設計對於確保安全使用至關重要。若運用得當，代辦型 AI 可能成為歷史上最有價值的技術之一。"
+    },
+    {
+      "headingEn": "News: Accounts Face Deactivation",
+      "headingZh": "新聞：帳號面臨停用",
+      "contentEn": "The Australian government has announced new rules for social media platforms to protect young users from accessing harmful content. The policy requires age verification to ensure children meet the minimum age requirement of 16 years old. Accounts that belong to underage users may face deactivation.",
+      "contentZh": "澳洲政府宣布針對社群媒體平台制定新規定，以保護年輕用戶免於接觸有害內容。該政策要求進行年齡驗證，以確保兒童符合最低 16 歲的年齡要求。屬於未成年用戶的帳號可能會被停用。"
+    }
+  ],
+  "vocabulary": [
+    { "word": "Strategic", "pos": "adj.", "ipa": "/strəˈtiːdʒɪk/", "trans": "戰略性的、策略上的", "exEn": "Wise leaders focus on strategic decisions rather than regular tasks.", "exZh": "英明的領導者專注於策略性決策，而非例行任務。" },
+    { "word": "Simplify", "pos": "v.", "ipa": "/ˈsɪmpləˌfaɪ/", "trans": "使簡化", "exEn": "Since the project is complicated, I'd like to simplify it.", "exZh": "既然計畫很複雜，我想把它簡化。" },
+    { "word": "Milestone", "pos": "n.", "ipa": "/ˈmaɪlˌstoʊn/", "trans": "里程碑", "exEn": "The new product launch marks a major milestone for the company.", "exZh": "新產品的發表標誌著公司的一個重要里程碑。" },
+    { "word": "Errand", "pos": "n.", "ipa": "/ˈerənd/", "trans": "跑腿、差事", "exEn": "I need to finish a few quick errands before I go to class.", "exZh": "在上課前我需要去辦幾件小雜事。" },
+    { "word": "Oversight", "pos": "n.", "ipa": "/ˈoʊvərˌsaɪt/", "trans": "監管、監督", "exEn": "The project failed because there was no proper oversight of the budget.", "exZh": "該計畫失敗是因為對預算缺乏適當的監管。" },
+    { "word": "Ban", "pos": "n.", "ipa": "/bæn/", "trans": "禁令", "exEn": "After the new law passed, several apps prepared for a ban.", "exZh": "新法通過後，幾款應用程式為禁令做好了準備。" },
+    { "word": "Verification", "pos": "n.", "ipa": "/ˌverɪfɪˈkeɪʃn/", "trans": "驗證、核實", "exEn": "The bank requires identity verification before you can transfer money.", "exZh": "銀行要求在轉帳前進行身份驗證。" },
+    { "word": "Deactivation", "pos": "n.", "ipa": "/diˌæktɪˈveɪʃn/", "trans": "停用、使無效", "exEn": "The deactivation of his account was caused by a security breach.", "exZh": "他的帳號被停用是因為資安漏洞。" }
+  ],
+  "grammar": [
+    { "title": "分詞句型 (Participle Phrases)", "desc": "省略連接詞與主詞，V-ing 表主動，V-p.p. 表被動。", "exEn": "Used wisely, agentic AI could become very valuable.", "exZh": "若善加利用（被智慧地使用），代理型 AI 將變得非常有價值。" },
+    { "title": "Whether 引導的名詞子句", "desc": "表示「是否」，常作為名詞子句當受詞或補語。", "exEn": "The question is not whether it will grow, but how it is guided.", "exZh": "問題不在於它是否會成長，而在於如何引導它。" }
+  ],
+  "quiz": [
+    { "question": "Why does the Australian government require age verification?", "options": ["To collect taxes.", "To protect young users from harmful content.", "To increase adult users.", "To help children with homework."], "correctIndex": 1, "explanation": "文中提到政策目的是保護年輕用戶免於有害內容或網路霸凌。" },
+    { "question": "If you want to log in to your bank, you need a process of identity __________.", "options": ["deactivation", "oversight", "verification", "inventory"], "correctIndex": 2, "explanation": "登入銀行帳戶需要進行「身份驗證」(identity verification)。" }
+  ]
+}
