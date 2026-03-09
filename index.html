@@ -1,124 +1,233 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-
 <head>
 <meta charset="UTF-8">
-<title>空中英語每日互動閱讀</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>空中英語教室互動學習</title>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
-
 </head>
 
-<body class="bg-slate-100">
+<body class="bg-gray-100">
 
 <div id="root"></div>
 
 <script type="text/babel">
 
-const {useState,useEffect}=React
+const { useState, useEffect } = React;
 
 function App(){
 
-const [lesson,setLesson]=useState(null)
-const [date,setDate]=useState("")
+const [lesson,setLesson] = useState(null);
+const [loading,setLoading] = useState(true);
+const [date,setDate] = useState("");
+const [section,setSection] = useState(0);
 
 useEffect(()=>{
 
-const today=new Date().toISOString().split("T")[0]
-setDate(today)
+const today = new Date().toISOString().split("T")[0];
+setDate(today);
+loadArticle(today);
 
-loadLesson(today)
+},[]);
 
-},[])
+function loadArticle(d){
 
-function loadLesson(d){
+setLoading(true);
 
 fetch(`articles/${d}.json`)
 .then(res=>res.json())
 .then(data=>{
-setLesson(data)
+setLesson(data);
+setLoading(false);
+setSection(0);
 })
 .catch(()=>{
-setLesson(null)
+setLesson(null);
+setLoading(false);
 })
 
 }
 
-function changeDate(e){
+function speak(text){
 
-const d=e.target.value
-setDate(d)
+const utter = new SpeechSynthesisUtterance(text);
+utter.lang="en-US";
+speechSynthesis.speak(utter);
 
-loadLesson(d)
+}
+
+if(loading){
+
+return(
+<div className="text-center mt-40 text-2xl">
+Loading...
+</div>
+)
 
 }
 
 if(!lesson){
 
 return(
+<div className="text-center mt-40 text-2xl">
 
-<div className="p-20 text-center">
-
-<h1 className="text-3xl mb-6">
 找不到文章
+
+<div className="mt-6">
+<input
+type="date"
+value={date}
+onChange={(e)=>{
+setDate(e.target.value);
+loadArticle(e.target.value);
+}}
+className="border p-2"
+/>
+</div>
+
+</div>
+)
+
+}
+
+const part = lesson.content[section];
+
+return(
+
+<div className="max-w-4xl mx-auto p-6">
+
+{/* Header */}
+
+<div className="bg-white p-6 rounded-xl shadow mb-6">
+
+<h1 className="text-3xl font-bold mb-2">
+{lesson.meta.mainTitleEn}
 </h1>
 
-<input type="date"
+<h2 className="text-xl text-gray-600">
+{lesson.meta.mainTitleZh}
+</h2>
+
+<p className="mt-2 text-gray-500">
+{lesson.meta.subtitle}
+</p>
+
+</div>
+
+{/* Date Switch */}
+
+<div className="mb-6">
+
+<input
+type="date"
 value={date}
-onChange={changeDate}
+onChange={(e)=>{
+setDate(e.target.value);
+loadArticle(e.target.value);
+}}
 className="border p-2"
 />
 
 </div>
 
-)
+{/* Article */}
 
-}
+<div className="bg-white p-6 rounded-xl shadow">
 
-return(
+<h3 className="text-xl font-bold mb-2">
+{part.headingEn}
+</h3>
 
-<div className="max-w-3xl mx-auto p-6">
+<h4 className="text-lg text-gray-600 mb-4">
+{part.headingZh}
+</h4>
 
-<h1 className="text-4xl font-bold mb-6 text-indigo-700">
-
-{lesson.meta.title}
-
-</h1>
-
-<input type="date"
-value={date}
-onChange={changeDate}
-className="border p-2 mb-6"
-/>
-
-<div className="bg-white p-6 rounded shadow">
-
-{lesson.content.map((c,i)=>(
-<div key={i} className="mb-6">
-
-<h2 className="font-bold text-lg mb-2">
-
-{c.headingEn}
-
-</h2>
-
-<p className="mb-2">
-
-{c.contentEn}
-
+<p className="text-lg leading-relaxed mb-4">
+{part.contentEn}
 </p>
 
-<p className="text-gray-500">
-
-{c.contentZh}
-
+<p className="text-gray-700 leading-relaxed">
+{part.contentZh}
 </p>
+
+<button
+onClick={()=>speak(part.contentEn)}
+className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+>
+🔊 朗讀
+</button>
 
 </div>
+
+{/* Navigation */}
+
+<div className="flex justify-between mt-6">
+
+<button
+disabled={section===0}
+onClick={()=>setSection(section-1)}
+className="bg-gray-300 px-4 py-2 rounded"
+>
+上一段
+</button>
+
+<button
+disabled={section===lesson.content.length-1}
+onClick={()=>setSection(section+1)}
+className="bg-gray-300 px-4 py-2 rounded"
+>
+下一段
+</button>
+
+</div>
+
+{/* Vocabulary */}
+
+<div className="bg-white p-6 rounded-xl shadow mt-8">
+
+<h3 className="text-2xl font-bold mb-4">
+單字 Vocabulary
+</h3>
+
+{lesson.vocabulary.map((v,i)=>(
+
+<div key={i} className="mb-4 border-b pb-3">
+
+<div className="text-lg font-semibold">
+{v.word} ({v.pos})
+</div>
+
+<div className="text-gray-500">
+{v.ipa}
+</div>
+
+<div>
+{v.trans}
+</div>
+
+<div className="mt-2 text-gray-700">
+{v.exEn}
+</div>
+
+<div className="text-gray-600">
+{v.exZh}
+</div>
+
+<button
+onClick={()=>speak(v.word)}
+className="mt-2 text-blue-500"
+>
+🔊 發音
+</button>
+
+</div>
+
 ))}
 
 </div>
@@ -129,10 +238,9 @@ className="border p-2 mb-6"
 
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>)
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
 
 </script>
 
 </body>
-
 </html>
