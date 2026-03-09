@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "title": "代理型 AI 的興起：新型 AI 如何改變你的世界",
+    "subtitle": "探索代理型 AI 的定義、應用與澳洲社群媒體新政策",
+    "series": "Technology & News Focus",
+    "mainTitleEn": "The Rise of Agentic AI: Changing Your World",
+    "mainTitleZh": "代理型 AI 的興起：改變你的世界"
+  },
+  "content": [
+    {
+      "headingEn": "What is Agentic AI?",
+      "headingZh": "什麼是代理型 AI？",
+      "contentEn": "Unlike traditional systems that simply answer questions, agentic AI can simplify large problems by breaking them into smaller steps, remembering past actions and adapting in fast-changing situations. It is more like a coworker who takes initiative than a tool that waits for orders.",
+      "contentZh": "不同於傳統系統僅僅是回答問題，代理型 AI 能透過將大問題拆解成小步驟、記憶過去的行動並適應快速變化的環境，來簡化複雜問題。它更像是一位會主動採取主動權的同事，而非僅僅等待指令的工具。"
+    },
+    {
+      "headingEn": "Why Now?",
+      "headingZh": "為什麼是現在？",
+      "contentEn": "This shift is possible because of progress in large language models (LLMs), planning methods and memory systems. These features allow AI agents to research, plan and act without constant human direction, performing complex tasks with fewer interruptions.",
+      "contentZh": "這種轉變之所以可能，是因為大型語言模型（LLMs）、規劃方法與記憶系統的進步。這些功能讓 AI 代理人無需人類持續指示即可進行研究、規劃與行動，在執行複雜任務時中斷更少。"
+    },
+    {
+      "headingEn": "Where Will We See It?",
+      "headingZh": "我們會在何處見到它？",
+      "contentEn": "Agentic AI is already everywhere. It manages inventory in factories, assists with patient tracking in hospitals, schedules meetings in offices, and even helps financial institutions track markets and complete trades within human-set limits.",
+      "contentZh": "代理型 AI 已經無處不在。它在工廠管理存貨，在醫院協助病患追蹤，在辦公室安排會議，甚至幫助金融機構在人為設定的限制內追蹤市場並完成交易。"
+    },
+    {
+      "headingEn": "How to Make It Work for You",
+      "headingZh": "如何讓它為你所用",
+      "contentEn": "Agentic AI helps you operate faster and focus on strategic work. For students, it organizes research and summarizes readings. For workers, it simplifies routine tasks like scheduling and reminders. It is also useful for personal errands and projects.",
+      "contentZh": "代理型 AI 幫助你運作得更快並專注於策略性工作。對學生而言，它能組織研究與總結讀物；對工作者來說，它能簡化排程與提醒等例行任務。它在個人跑腿雜事與計畫上也很有用。"
+    },
+    {
+      "headingEn": "News: Australia's New Social Media Rules",
+      "headingZh": "新聞：澳洲社群媒體新規定",
+      "contentEn": "The Australian government has announced new rules requiring age verification for social media platforms to protect young users from harmful content. Accounts belonging to users under 16 years old may face deactivation.",
+      "contentZh": "澳洲政府宣布了新規定，要求社群媒體平台進行年齡驗證以保護年輕用戶免受有害內容侵害。屬於 16 歲以下用戶的帳號可能會面臨停用。"
+    }
+  ],
+  "vocabulary": [
+    { "word": "Simplify", "pos": "v.", "ipa": "/ˈsɪmpləˌfaɪ/", "trans": "使簡化、使簡易", "exEn": "We need to simplify the instructions so everyone can understand them.", "exZh": "我們需要簡化說明，以便每個人都能理解。" },
+    { "word": "Initiative", "pos": "n.", "ipa": "/ɪˈnɪʃətɪv/", "trans": "主動性、進取心", "exEn": "Employers value workers who show initiative and solve problems independently.", "exZh": "雇主看重那些展現主動性並獨立解決問題的員工。" },
+    { "word": "Strategic", "pos": "adj.", "ipa": "/strəˈtidʒɪk/", "trans": "戰略性的、策略上的", "exEn": "The company made a strategic decision to expand into the Asian market.", "exZh": "公司做出了一個進軍亞洲市場的策略性決定。" },
+    { "word": "Inventory", "pos": "n.", "ipa": "/ˈɪnvənˌtɔri/", "trans": "存貨、庫存", "exEn": "The store closes for two days each year to check its inventory.", "exZh": "這家商店每年關閉兩天以盤點庫存。" },
+    { "word": "Errand", "pos": "n.", "ipa": "/ˈɛrənd/", "trans": "差事、跑腿", "exEn": "I have a few errands to run before I meet you for lunch.", "exZh": "在和你吃午餐前，我有幾件雜事要辦。" },
+    { "word": "Oversight", "pos": "n.", "ipa": "/ˈovɚˌsaɪt/", "trans": "監督、監管", "exEn": "Strong government oversight is needed to prevent financial fraud.", "exZh": "需要強力的政府監管來防止金融詐騙。" },
+    { "word": "Verification", "pos": "n.", "ipa": "/ˌvɛrəfəˈkeʃən/", "trans": "驗證、確認", "exEn": "The app requires email verification before you can log in.", "exZh": "該應用程式在登入前需要電子郵件驗證。" },
+    { "word": "Deactivation", "pos": "n.", "ipa": "/diˌæktəˈveʃən/", "trans": "停用、使其不活動", "exEn": "The deactivation of his account happened after he violated the terms of service.", "exZh": "在他的帳號違反服務條款後被停用了。" }
+  ],
+  "grammar": [
+    { "title": "more like A than B", "desc": "與其說是 B，不如說是 A。強調主語更接近 A 的特質。", "exEn": "It is more like a coworker who takes initiative than a tool that waits for orders.", "exZh": "它更像是一位會主動採取主動權的同事，而非僅僅等待指令的工具。" },
+    { "title": "分詞結構 (p.p. ..., S + V)", "desc": "置於句首的過去分詞片語，表示被動條件或狀態。", "exEn": "Used wisely, agentic AI could become one of the most valuable technologies in history.", "exZh": "若善加利用，代理型 AI 可能成為歷史上最有價值的技術之一。" },
+    { "title": "help someone (to) do something", "desc": "幫助某人做某事，help 後方的 to 常可省略。", "exEn": "Generally, agentic AI will help you operate faster.", "exZh": "一般來說，代理型 AI 會幫助你運作得更快。" }
+  ],
+  "quiz": [
+    { "question": "What is the main difference between traditional AI and agentic AI?", "options": ["Traditional AI is faster at processing data.", "Agentic AI can take initiative and act without constant direction.", "Agentic AI is only used in hospitals.", "Traditional AI requires more memory."], "correctIndex": 1, "explanation": "代理型 AI 像主動的同事，而非僅等待指令的工具。" },
+    { "question": "Under Australia's new rules, users must pass age __________ to use social media.", "options": ["inventory", "oversight", "verification", "deactivation"], "correctIndex": 2, "explanation": "澳洲政府要求進行年齡「驗證」(verification)。" }
+  ]
+}
