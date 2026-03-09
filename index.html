@@ -1,335 +1,184 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>空中英語教室 AI 學習平台</title>
-
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
 <script src="https://cdn.tailwindcss.com"></script>
-
+<style>
+    /* 優化手機滾動體驗 */
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+</style>
 </head>
-
-<body class="bg-gray-100">
-
+<body class="bg-slate-50 text-slate-900">
 <div id="root"></div>
 
 <script type="text/babel">
+const { useState, useEffect } = React;
 
-const {useState,useEffect} = React;
+function App() {
+    const [lesson, setLesson] = useState(null);
+    const [articles, setArticles] = useState([]);
+    const [section, setSection] = useState(0);
+    const [date, setDate] = useState("");
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // 控制手機版選單
+    const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem("favWords") || "[]"));
 
-function App(){
+    useEffect(() => {
+        fetch("articles/index.json")
+            .then(r => r.json())
+            .then(data => {
+                setArticles(data);
+                if (data.length > 0) {
+                    loadArticle(data[0].date);
+                    setDate(data[0].date);
+                }
+            });
+    }, []);
 
-const [lesson,setLesson]=useState(null);
-const [articles,setArticles]=useState([]);
-const [section,setSection]=useState(0);
-const [date,setDate]=useState("");
-const [quiz,setQuiz]=useState(null);
-const [favorites,setFavorites]=useState(
-JSON.parse(localStorage.getItem("favWords")||"[]")
-);
+    function loadArticle(d) {
+        fetch(`articles/${d}.json`)
+            .then(r => r.json())
+            .then(data => {
+                setLesson(data);
+                setSection(0);
+                setIsMenuOpen(false); // 切換文章後自動關閉手機選單
+                window.scrollTo(0, 0); // 回到頂部
+            });
+    }
 
-// 請將以下區塊取代原本 useEffect 抓取 articles/index.json 的部分
-useEffect(() => {
-    // 1. 自動向 GitHub API 詢問檔案列表
-    // 格式：https://api.github.com/repos/您的帳號/專案名稱/contents/articles
-    fetch("https://api.github.com/repos/bowa52259-cyber/english-learning-site/contents/articles")
-    .then(r => r.json())
-    .then(files => {
-        // 2. 過濾出所有 .json 檔案，並排除 index.json 本身
-        const articleFiles = files
-            .filter(f => f.name.endsWith(".json") && f.name !== "index.json")
-            .map(f => ({
-                date: f.name.replace(".json", ""),
-                title: `Lesson: ${f.name.replace(".json", "")}` // 暫時以日期當標題
-            }))
-            .reverse(); // 讓最新的日期排在最上面
+    function speak(text) {
+        let u = new SpeechSynthesisUtterance(text);
+        u.lang = "en-US";
+        u.rate = 0.9;
+        speechSynthesis.speak(u);
+    }
 
-        setArticles(articleFiles);
+    return (
+        <div className="min-h-screen flex flex-col">
+            {/* Header - 手機版加入漢堡按鈕 */}
+            <header className="bg-white shadow-sm sticky top-0 z-50 px-4 py-3 md:px-8 flex justify-between items-center">
+                <div>
+                    <h1 className="text-xl md:text-2xl font-bold text-indigo-700">空中英語 AI 平台</h1>
+                </div>
+                <button 
+                    className="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                    {isMenuOpen ? "✕ 關閉" : "☰ 選單"}
+                </button>
+            </header>
 
-        // 3. 預設載入最新的一篇
-        if(articleFiles.length > 0) {
-            loadArticle(articleFiles[0].date);
-            setDate(articleFiles[0].date);
-        }
-    })
-    .catch(err => console.error("API 載入失敗，請檢查網路或 Repo 權限", err));
-}, []);
+            <div className="flex flex-1 relative overflow-hidden">
+                {/* Sidebar - 手機版變成抽屜式或隱藏 */}
+                <aside className={`
+                    fixed inset-y-0 left-0 transform ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}
+                    md:relative md:translate-x-0 transition duration-200 ease-in-out
+                    w-64 bg-white border-r z-40 p-4 overflow-y-auto custom-scrollbar
+                `}>
+                    <h2 className="font-bold text-gray-500 text-sm uppercase tracking-wider mb-4">文章清單</h2>
+                    <div className="space-y-1">
+                        {articles.map(a => (
+                            <div 
+                                key={a.date}
+                                onClick={() => loadArticle(a.date)}
+                                className={`p-3 rounded-lg cursor-pointer transition-colors ${date === a.date ? 'bg-indigo-50 text-indigo-700 font-medium' : 'hover:bg-gray-50'}`}
+                            >
+                                <div className="text-xs opacity-60">{a.date}</div>
+                                <div className="text-sm truncate">{a.title}</div>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    <div className="mt-8">
+                        <h2 className="font-bold text-gray-500 text-sm uppercase tracking-wider mb-4">收藏單字 ({favorites.length})</h2>
+                        <div className="flex flex-wrap gap-2">
+                            {favorites.map(f => (
+                                <span key={f} className="px-2 py-1 bg-slate-100 text-xs rounded border text-slate-600">{f}</span>
+                            ))}
+                        </div>
+                    </div>
+                </aside>
 
-function loadArticle(d){
+                {/* Main Content */}
+                <main className="flex-1 overflow-y-auto p-4 md:p-8">
+                    {lesson ? (
+                        <div className="max-w-3xl mx-auto">
+                            <div className="mb-6">
+                                <span className="bg-indigo-100 text-indigo-700 text-xs font-bold px-2 py-1 rounded">DAILY LESSON</span>
+                                <h2 className="text-2xl md:text-4xl font-extrabold mt-2 text-slate-800">{lesson.meta.mainTitleEn}</h2>
+                                <h3 className="text-lg md:text-xl text-slate-500 mt-1 font-medium">{lesson.meta.mainTitleZh}</h3>
+                            </div>
 
-fetch(`articles/${d}.json`)
-.then(r=>r.json())
-.then(data=>{
-setLesson(data);
-setSection(0);
-setQuiz(null);
-})
+                            {/* 文章內容卡片 */}
+                            <div className="bg-white rounded-2xl shadow-sm border p-5 md:p-8 mb-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h4 className="text-indigo-600 font-bold tracking-wide">{lesson.content[section].headingEn}</h4>
+                                    <button onClick={() => speak(lesson.content[section].contentEn)} className="p-2 bg-indigo-50 text-indigo-600 rounded-full hover:bg-indigo-100 transition">🔊</button>
+                                </div>
+                                <p className="text-lg md:text-xl leading-relaxed text-slate-700 mb-4">{lesson.content[section].contentEn}</p>
+                                <p className="text-base text-slate-500 border-l-4 border-slate-200 pl-4 italic">{lesson.content[section].contentZh}</p>
+                                
+                                {/* 換段按鈕 */}
+                                <div className="flex gap-4 mt-8">
+                                    <button 
+                                        disabled={section === 0}
+                                        onClick={() => setSection(section - 1)}
+                                        className="flex-1 py-3 px-4 rounded-xl border-2 font-bold disabled:opacity-30 hover:bg-slate-50 transition"
+                                    >← 上一段</button>
+                                    <button 
+                                        disabled={section === lesson.content.length - 1}
+                                        onClick={() => setSection(section + 1)}
+                                        className="flex-1 py-3 px-4 rounded-xl bg-indigo-600 text-white font-bold disabled:opacity-30 hover:bg-indigo-700 transition shadow-lg shadow-indigo-200"
+                                    >下一段 →</button>
+                                </div>
+                            </div>
 
+                            {/* 單字列表 - 改為手機易讀卡片模式 */}
+                            <div className="space-y-4">
+                                <h3 className="text-xl font-bold flex items-center gap-2">
+                                    <span className="w-2 h-6 bg-indigo-600 rounded-full"></span>重點單字
+                                </h3>
+                                {lesson.vocabulary.map((v, i) => (
+                                    <div key={i} className="bg-white p-4 rounded-xl border shadow-sm group">
+                                        <div className="flex justify-between items-start">
+                                            <div>
+                                                <span className="text-lg font-bold text-indigo-700">{v.word}</span>
+                                                <span className="ml-2 text-xs bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded">{v.pos}</span>
+                                                <div className="text-sm text-slate-400 font-mono mt-1">{v.ipa}</div>
+                                            </div>
+                                            <button onClick={() => speak(v.word)} className="text-slate-300 hover:text-indigo-500 transition">🔊 發音</button>
+                                        </div>
+                                        <div className="mt-2 text-slate-800 font-medium">{v.trans}</div>
+                                        <div className="mt-2 text-sm text-slate-500 italic bg-slate-50 p-2 rounded">"{v.exEn}"</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center justify-center h-full text-slate-400">
+                            <p className="text-lg">請從選單中選擇一篇文章</p>
+                        </div>
+                    )}
+                </main>
+            </div>
+            
+            {/* 背景遮罩 (手機版選單開啟時) */}
+            {isMenuOpen && (
+                <div 
+                    className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
+                    onClick={() => setIsMenuOpen(false)}
+                ></div>
+            )}
+        </div>
+    );
 }
 
-function speak(text){
-
-let u=new SpeechSynthesisUtterance(text);
-u.lang="en-US";
-speechSynthesis.speak(u);
-
-}
-
-function toggleFav(word){
-
-let newFav;
-
-if(favorites.includes(word)){
-newFav=favorites.filter(w=>w!==word);
-}else{
-newFav=[...favorites,word];
-}
-
-setFavorites(newFav);
-localStorage.setItem("favWords",JSON.stringify(newFav));
-
-}
-
-function generateQuiz(){
-
-let words=lesson.vocabulary;
-
-let q=words[Math.floor(Math.random()*words.length)];
-
-let options=[q.trans];
-
-while(options.length<4){
-
-let r=words[Math.floor(Math.random()*words.length)].trans;
-
-if(!options.includes(r)) options.push(r);
-
-}
-
-options.sort(()=>Math.random()-0.5);
-
-setQuiz({
-word:q.word,
-answer:q.trans,
-options
-})
-
-}
-
-return(
-
-<div className="max-w-6xl mx-auto p-6">
-
-{/* Header */}
-
-<div className="bg-white shadow rounded-xl p-6 mb-6">
-
-<h1 className="text-3xl font-bold">
-空中英語教室 AI 學習平台
-</h1>
-
-<p className="text-gray-500">
-Daily English Interactive Learning
-</p>
-
-</div>
-
-<div className="grid grid-cols-4 gap-6">
-
-{/* Sidebar */}
-
-<div className="col-span-1 bg-white p-4 rounded-xl shadow">
-
-<h2 className="font-bold mb-3">文章列表</h2>
-
-{articles.map(a=>(
-<div
-key={a.date}
-className="cursor-pointer p-2 hover:bg-gray-100"
-onClick={()=>{
-
-setDate(a.date)
-loadArticle(a.date)
-
-}}
->
-{a.date}
-<br/>
-<span className="text-sm text-gray-500">
-{a.title}
-</span>
-</div>
-))}
-
-<hr className="my-4"/>
-
-<h2 className="font-bold mb-2">收藏單字</h2>
-
-{favorites.map(f=>(
-<div key={f}>{f}</div>
-))}
-
-</div>
-
-{/* Article */}
-
-<div className="col-span-3">
-
-{lesson && (
-
-<div className="bg-white p-6 rounded-xl shadow">
-
-<h2 className="text-2xl font-bold">
-{lesson.meta.mainTitleEn}
-</h2>
-
-<h3 className="text-gray-600 mb-4">
-{lesson.meta.mainTitleZh}
-</h3>
-
-<div>
-
-<h4 className="font-bold text-lg">
-{lesson.content[section].headingEn}
-</h4>
-
-<p className="mt-2">
-{lesson.content[section].contentEn}
-</p>
-
-<p className="text-gray-600 mt-2">
-{lesson.content[section].contentZh}
-</p>
-
-<button
-className="mt-3 bg-blue-500 text-white px-3 py-1 rounded"
-onClick={()=>speak(lesson.content[section].contentEn)}
->
-朗讀
-</button>
-
-</div>
-
-<div className="flex justify-between mt-4">
-
-<button
-disabled={section===0}
-onClick={()=>setSection(section-1)}
->
-上一段
-</button>
-
-<button
-disabled={section===lesson.content.length-1}
-onClick={()=>setSection(section+1)}
->
-下一段
-</button>
-
-</div>
-
-{/* Vocabulary */}
-
-<h3 className="text-xl font-bold mt-8">
-Vocabulary
-</h3>
-
-{lesson.vocabulary.map((v,i)=>(
-<div key={i} className="border-b py-3">
-
-<b>{v.word}</b> ({v.pos})
-
-<div>{v.trans}</div>
-
-<div className="text-sm text-gray-500">
-{v.exEn}
-</div>
-
-<button
-className="text-blue-500"
-onClick={()=>speak(v.word)}
->
-發音
-</button>
-
-<button
-className="ml-3 text-yellow-600"
-onClick={()=>toggleFav(v.word)}
->
-收藏
-</button>
-
-</div>
-))}
-
-{/* Quiz */}
-
-<div className="mt-8">
-
-<button
-className="bg-green-500 text-white px-4 py-2 rounded"
-onClick={generateQuiz}
->
-產生單字測驗
-</button>
-
-{quiz && (
-
-<div className="mt-4">
-
-<h4 className="font-bold">
-{quiz.word} 的意思是？
-</h4>
-
-{quiz.options.map((o,i)=>(
-<div key={i}>
-
-<button
-className="border px-3 py-1 mt-1"
-onClick={()=>{
-
-if(o===quiz.answer)
-alert("答對")
-else
-alert("答錯")
-
-}}
->
-{o}
-</button>
-
-</div>
-))}
-
-</div>
-
-)}
-
-</div>
-
-</div>
-
-)}
-
-</div>
-
-</div>
-
-</div>
-
-)
-
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>)
-
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
-
 </body>
 </html>
