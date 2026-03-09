@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+<meta charset="UTF-8">
+<title>空中英語每日互動閱讀</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+
+</head>
+
+<body class="bg-slate-100">
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+const {useState,useEffect}=React
+
+function App(){
+
+const [lesson,setLesson]=useState(null)
+const [date,setDate]=useState("")
+
+useEffect(()=>{
+
+const today=new Date().toISOString().split("T")[0]
+setDate(today)
+
+loadLesson(today)
+
+},[])
+
+function loadLesson(d){
+
+fetch(`articles/${d}.json`)
+.then(res=>res.json())
+.then(data=>{
+setLesson(data)
+})
+.catch(()=>{
+setLesson(null)
+})
+
+}
+
+function changeDate(e){
+
+const d=e.target.value
+setDate(d)
+
+loadLesson(d)
+
+}
+
+if(!lesson){
+
+return(
+
+<div className="p-20 text-center">
+
+<h1 className="text-3xl mb-6">
+找不到文章
+</h1>
+
+<input type="date"
+value={date}
+onChange={changeDate}
+className="border p-2"
+/>
+
+</div>
+
+)
+
+}
+
+return(
+
+<div className="max-w-3xl mx-auto p-6">
+
+<h1 className="text-4xl font-bold mb-6 text-indigo-700">
+
+{lesson.meta.title}
+
+</h1>
+
+<input type="date"
+value={date}
+onChange={changeDate}
+className="border p-2 mb-6"
+/>
+
+<div className="bg-white p-6 rounded shadow">
+
+{lesson.content.map((c,i)=>(
+<div key={i} className="mb-6">
+
+<h2 className="font-bold text-lg mb-2">
+
+{c.headingEn}
+
+</h2>
+
+<p className="mb-2">
+
+{c.contentEn}
+
+</p>
+
+<p className="text-gray-500">
+
+{c.contentZh}
+
+</p>
+
+</div>
+))}
+
+</div>
+
+</div>
+
+)
+
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>)
+
+</script>
+
+</body>
+
+</html>
