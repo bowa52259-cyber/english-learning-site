@@ -34,20 +34,32 @@ const [favorites,setFavorites]=useState(
 JSON.parse(localStorage.getItem("favWords")||"[]")
 );
 
-useEffect(()=>{
+// 請將以下區塊取代原本 useEffect 抓取 articles/index.json 的部分
+useEffect(() => {
+    // 1. 自動向 GitHub API 詢問檔案列表
+    // 格式：https://api.github.com/repos/您的帳號/專案名稱/contents/articles
+    fetch("https://api.github.com/repos/bowa52259-cyber/english-learning-site/contents/articles")
+    .then(r => r.json())
+    .then(files => {
+        // 2. 過濾出所有 .json 檔案，並排除 index.json 本身
+        const articleFiles = files
+            .filter(f => f.name.endsWith(".json") && f.name !== "index.json")
+            .map(f => ({
+                date: f.name.replace(".json", ""),
+                title: `Lesson: ${f.name.replace(".json", "")}` // 暫時以日期當標題
+            }))
+            .reverse(); // 讓最新的日期排在最上面
 
-fetch("articles/index.json")
-.then(r=>r.json())
-.then(data=>{
-setArticles(data);
+        setArticles(articleFiles);
 
-if(data.length>0){
-loadArticle(data[0].date);
-setDate(data[0].date);
-}
-})
-
-},[])
+        // 3. 預設載入最新的一篇
+        if(articleFiles.length > 0) {
+            loadArticle(articleFiles[0].date);
+            setDate(articleFiles[0].date);
+        }
+    })
+    .catch(err => console.error("API 載入失敗，請檢查網路或 Repo 權限", err));
+}, []);
 
 function loadArticle(d){
 
