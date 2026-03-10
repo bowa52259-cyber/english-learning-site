@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "小精靈：史上最成功的街機遊戲",
+    "subtitle": "探索披薩如何啟發岩谷徹創造出風靡全球的經典遊戲",
+    "series": "Arcade Classics",
+    "mainTitleEn": "PAC-MAN: The Most Successful Arcade Game",
+    "mainTitleZh": "小精靈：史上最成功的街機遊戲"
+  },
+  "content": [
+    {
+      "headingEn": "Inspiration from Pizza",
+      "headingZh": "來自披薩的靈感",
+      "contentEn": "For Toru Iwatani, inspiration came from a pizza box. The shape of a pizza with one piece missing looked like a mouth, inspiring him to create Pac-Man—a hungry character going through tunnels to eat as much food as fast as possible while dodging colorful ghosts like Blinky and Clyde.",
+      "contentZh": "對岩谷徹來說，靈感來自披薩盒。少了一片的披薩形狀看起來像個嘴巴，啟發他創造出小精靈——一個飢餓的角色，穿梭於隧道中盡可能快速地吃掉食物，同時躲避布林奇和克萊德等彩色幽靈。"
+    },
+    {
+      "headingEn": "Changing Game Culture",
+      "headingZh": "改變遊戲文化",
+      "contentEn": "In the late 70s, most successful games involved shooting and violence. Iwatani wanted to change this culture by creating a non-violent game that everyone, including women in particular, could enjoy. Pac-Man fit the bill and continues to draw players of all ages today.",
+      "contentZh": "在 70 年代末，大多數成功的遊戲都涉及射擊與暴力。岩谷想透過創造一款每個人（尤其是女性）都能享受的非暴力遊戲來改變這種文化。《小精靈》符合了這項要求，且至今持續吸引著各年齡層的玩家。"
+    }
+  ],
+  "vocabulary": [
+    { "word": "Tunnel", "pos": "n.", "ipa": "/ˈtʌnl/", "trans": "隧道", "exEn": "The train went through a long tunnel under the mountain.", "exZh": "火車穿過山底下一條長長的隧道。" },
+    { "word": "Thus", "pos": "adv.", "ipa": "/ðʌs/", "trans": "因此、從而", "exEn": "He didn't study for the exam; thus, he failed.", "exZh": "他沒有為考試讀書，因此他考不及格。" },
+    { "word": "Dodge", "pos": "v.", "ipa": "/dɑːdʒ/", "trans": "閃躲、避開", "exEn": "The player managed to dodge the ball just in time.", "exZh": "球員及時成功躲開了那顆球。" },
+    { "word": "Relatively", "pos": "adv.", "ipa": "/ˈrelətɪvli/", "trans": "相對地", "exEn": "Compared to last year, this winter is relatively warm.", "exZh": "與去年相比，今年冬天相對溫暖。" },
+    { "word": "Violence", "pos": "n.", "ipa": "/ˈvaɪələns/", "trans": "暴力", "exEn": "The movie was criticized for having too much senseless violence.", "exZh": "這部電影因過多無謂的暴力而受到批評。" },
+    { "word": "Intend", "pos": "v.", "ipa": "/ɪnˈtend/", "trans": "打算、計劃", "exEn": "I intend to finish this project by Friday afternoon.", "exZh": "我打算在週五下午前完成這個專案。" },
+    { "word": "Arcade", "pos": "n.", "ipa": "/ɑːrˈkeɪd/", "trans": "電子遊樂場", "exEn": "Many teenagers spent their weekends at the video game arcade.", "exZh": "許多青少年在電子遊樂場度過週末。" },
+    { "word": "Invader", "pos": "n.", "ipa": "/ɪnˈveɪdər/", "trans": "侵略者", "exEn": "The army was prepared to defend the country against any invader.", "exZh": "軍隊準備好保衛國家抵禦任何侵略者。" }
+  ],
+  "grammar": [
+    { "title": "Who knew...?", "desc": "反詰句，用來表達「誰會知道呢？」或「沒人料到」，強調事情出乎意料。", "exEn": "Who knew that inspiration could come from pizza?", "exZh": "誰能想到靈感竟然來自披薩？" },
+    { "title": "As... as could", "desc": "用來強調程度或數量的極限。", "exEn": "He tried to eat as much food as fast as he could.", "exZh": "他試圖以最快的速度盡可能吃掉更多的食物。" },
+    { "title": "Fit the bill", "desc": "慣用語，意指符合要求或合適。", "exEn": "Pac-Man fit the bill for a game everyone could enjoy.", "exZh": "小精靈符合了一款每個人都能享受的遊戲要求。" }
+  ],
+  "quiz": [
+    { "question": "Why did Toru Iwatani want to create Pac-Man?", "options": ["To copy Space Invaders.", "To create a non-violent game for everyone.", "To advertise pizza.", "To attract only teenage boys."], "correctIndex": 1, "explanation": "岩谷徹希望創造一款非暴力且男女老少都能享受的遊戲。" },
+    { "question": "The new car is small and fuel-efficient; it perfectly __________ for the family.", "options": ["dodges the ball", "intends to change", "fits the bill", "goes through tunnels"], "correctIndex": 2, "explanation": "fit the bill 意指「符合要求」。" }
+  ]
+}
