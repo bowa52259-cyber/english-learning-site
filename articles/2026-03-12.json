@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "title": "空氣污染：隱形的威脅",
+    "subtitle": "從烹飪灶火到化石燃料，空氣污染無所不在",
+    "series": "Health & Environment",
+    "mainTitleEn": "AIR POLLUTION: AN INVISIBLE THREAT",
+    "mainTitleZh": "空氣污染：隱形的威脅"
+  },
+  "content": [
+    {
+      "headingEn": "The Global Reality",
+      "headingZh": "全球現況",
+      "contentEn": "Nearly everyone on Earth—99 percent of the global population—breathes air that is more polluted than the World Health Organization (WHO) guidelines allow. Air pollution causes around 8 million deaths each year, with people in low- and middle-income countries facing the highest exposure.",
+      "contentZh": "地球上幾乎所有人——全球 99% 的人口——呼吸的空氣都比世界衛生組織（WHO）準則所允許的污染更嚴重。空氣污染每年導致約 800 萬人死亡，其中低收入和中等收入國家的人民面臨最高的暴露風險。"
+    },
+    {
+      "headingEn": "Causes and Health Impacts",
+      "headingZh": "成因與健康影響",
+      "contentEn": "Vehicles and industrial production cause outdoor pollution, while cooking with wood or dung over open fires is the primary cause of household pollution. Tiny particles released by these sources enter the bloodstream and can lead to strokes, lung cancer, heart disease, and chronic respiratory illnesses.",
+      "contentZh": "汽機車和工業生產造成了戶外污染，而在開放式營火上使用木材或糞便烹飪則是家庭污染的主要原因。這些來源釋放的微小顆粒會進入血液，導致中風、肺癌、心臟病和慢性呼吸道疾病。"
+    },
+    {
+      "headingEn": "Impact on Children",
+      "headingZh": "對兒童的影響",
+      "contentEn": "Tragically, children are especially vulnerable. According to the 2024 State of Global Air report, 709,000 children died of causes related to air pollution in 2021, representing 15 percent of all global deaths of children under 5.",
+      "contentZh": "不幸的是，兒童特別容易受害。根據《2024 年全球空氣狀況報告》，2021 年有 70.9 萬名兒童死於與空氣污染相關的原因，佔全球五歲以下兒童死亡總數的 15%。"
+    },
+    {
+      "headingEn": "Solutions and Hope",
+      "headingZh": "解決方案與希望",
+      "contentEn": "Stricter regulations and clean energy are reducing deaths. Organizations like the Clean Cooking Alliance distribute clean-burning cookstoves in developing countries, which improve health and provide economic benefits by reducing cooking time.",
+      "contentZh": "更嚴格的規範和清潔能源正在減少死亡人數。像「清潔烹飪聯盟」這樣的組織在開發中國家分發清潔能源爐灶，這不僅改善了健康，還能透過縮短烹飪時間帶來經濟效益。"
+    },
+    {
+      "headingEn": "Individual Steps",
+      "headingZh": "個人行動",
+      "contentEn": "Individuals can improve air quality by planting purifying plants, using air purifiers, and switching to natural cleaning products. Clean air shouldn't be a luxury—it's a basic human right that we can all help safeguard.",
+      "contentZh": "個人可以透過種植淨化植物、使用空氣清淨機以及改用天然清潔產品來改善空氣品質。乾淨的空氣不應該是奢侈品——它是我們每個人都可以協助捍衛的基本人權。"
+    }
+  ],
+  "vocabulary": [
+    { "word": "Guideline", "pos": "n.", "ipa": "/ˈɡaɪd.laɪn/", "trans": "指導方針、準則", "exEn": "The company issued new safety guidelines for all employees.", "exZh": "公司為所有員工發布了新的安全準則。" },
+    { "word": "Mortality", "pos": "n.", "ipa": "/mɔːrˈtæl.ə.t̬i/", "trans": "死亡率、死亡數", "exEn": "Improved medical care has significantly reduced infant mortality.", "exZh": "醫療條件的改善顯著降低了嬰兒死亡率。" },
+    { "word": "Particle", "pos": "n.", "ipa": "/ˈpɑːr.t̬ɪ.kəl/", "trans": "微粒、顆粒", "exEn": "Dust particles in the air can trigger allergic reactions.", "exZh": "空氣中的塵埃微粒會引發過敏反應。" },
+    { "word": "Chronic", "pos": "adj.", "ipa": "/ˈkrɑː.nɪk/", "trans": "慢性的、長期的", "exEn": "He suffers from chronic back pain due to years of heavy lifting.", "exZh": "由於多年搬運重物，他患有慢性背痛。" },
+    { "word": "Awareness", "pos": "n.", "ipa": "/əˈwer.nəs/", "trans": "意識、察覺", "exEn": "The campaign aims to raise public awareness of climate change.", "exZh": "這項活動旨在提高大眾對氣候變遷的意識。" },
+    { "word": "Utilize", "pos": "v.", "ipa": "/ˈjuː.t̬əl.aɪz/", "trans": "利用、使用", "exEn": "The library utilizes a modern digital system to track books.", "exZh": "圖書館利用現代數位系統來追蹤書籍。" },
+    { "word": "Purify", "pos": "v.", "ipa": "/ˈpjʊr.ə.faɪ/", "trans": "淨化、使純淨", "exEn": "This filter is designed to purify drinking water.", "exZh": "這個濾水器是設計用來淨化飲用水的。" },
+    { "word": "Safeguard", "pos": "v.", "ipa": "/ˈseɪf.ɡɑːrd/", "trans": "保護、捍衛", "exEn": "We must take action to safeguard our environment for future generations.", "exZh": "我們必須採取行動為子孫後代守護環境。" },
+    { "word": "Invisible", "pos": "adj.", "ipa": "/ɪnˈvɪz.ə.bəl/", "trans": "隱形的、看不見的", "exEn": "Many gases in the atmosphere are invisible to the human eye.", "exZh": "大氣中的許多氣體是肉眼看不見的。" },
+    { "word": "Respiratory", "pos": "adj.", "ipa": "/ˈres.pə.rə.tɔːr.i/", "trans": "呼吸的", "exEn": "Masks can help protect our respiratory system from pollution.", "exZh": "口罩可以保護我們的呼吸系統不受污染。" }
+  ],
+  "grammar": [
+    { "title": "Not only... but (also)... as well", "desc": "當 Not only 置於句首時，主句需進行「倒裝」。", "exEn": "Not only are these cookstoves better for health, but they provide economic benefits as well.", "exZh": "這些爐灶不僅對健康更好，還能帶來經濟效益。" },
+    { "title": "Multiple Comparison (倍數表達法)", "desc": "倍數 + the + 名詞 + of ...", "exEn": "LMICs suffer almost eight times the mortality rates of high-income countries.", "exZh": "低收入和中等收入國家的死亡率幾乎是高收入國家的八倍。" },
+    { "title": "Past Participle as Modifier (分詞結構)", "desc": "Once V-ed 表示被動狀態的省略結構。", "exEn": "Once breathed into the lungs, these particles enter the bloodstream.", "exZh": "一旦吸入肺部，這些顆粒就會進入血液。" }
+  ],
+  "quiz": [
+    { "question": "What is the primary cause of household air pollution in developing countries?", "options": ["Industrial chemical plants.", "Cooking or heating with wood or dung.", "Electronic air purifiers.", "Smoking indoors."], "correctIndex": 1, "explanation": "室內污染主因是在簡易爐灶上燃燒木材、糞便或燈油。" },
+    { "question": "What percentage of global child deaths under 5 are related to air pollution?", "options": ["5%", "10%", "15%", "99%"], "correctIndex": 2, "explanation": "空氣污染相關原因佔全球五歲以下兒童死亡總數的 15%。" }
+  ]
+}
